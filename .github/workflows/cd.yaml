@@ -32,15 +32,11 @@ jobs:
 
       - id: deploy-backend
         name: Deploy backend
-        run: |
-          gcloud run deploy blog-backend \
-            --quiet \
-            --image ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend2:latest \
-            --update-labels managed-by=github-actions,commit-sha=${{ github.sha }} \
-            --platform managed \
-            --format json \
-            --region ${{ secrets.GOOGLECLOUD_REGION }} \
-            --verbosity=debug
+        uses: google-github-actions/deploy-cloudrun@v1
+        with:
+          service: blog-backend
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend2:latest
+          region: ${{ secrets.GOOGLECLOUD_REGION }}
 
       - name: Build and push frontend image
         uses: docker/build-push-action@v4
