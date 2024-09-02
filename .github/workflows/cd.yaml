@@ -28,7 +28,7 @@ jobs:
           context: ./backend
           file: ./backend/Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend2:latest
 
       - id: deploy-backend
         name: Deploy backend
