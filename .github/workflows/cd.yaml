@@ -35,7 +35,7 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v1
         with:
           service: blog-backend
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend:latest
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-backend2:latest
           region: ${{ secrets.GOOGLECLOUD_REGION }}
 
       - name: Build and push frontend image
@@ -44,7 +44,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/blog-frontend:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/blog-frontend2:latest
           build-args: |
             VITE_BACKEND_URL=${{ steps.deploy-backend.outputs.url }}/api/v1
 
@@ -53,5 +53,5 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v1
         with:
           service: blog-frontend
-          image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-frontend:latest
+          image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-frontend2:latest
           region: ${{ secrets.GOOGLECLOUD_REGION }}
