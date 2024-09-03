@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
 import { updatePost } from '../api/posts'
+import { DeletePost } from './DeletePost.jsx'
 
 const available_tags = (
   import.meta.env.VITE_AVAILABLE_TAGS || 'mongoose,mongodb,react,nodejs,express'
@@ -57,6 +58,16 @@ export function EditPost({
       style={{ maxWidth: '600px', margin: 'auto' }}
     >
       <div className='card-body'>
+        <div className='d-flex justify-content-end'>
+          <button
+            className='btn btn-link'
+            style={{ border: 'none' }}
+            aria-label='Cancel Edit'
+            onClick={onCancelEdit}
+          >
+            <i className='fa fa-times'></i>
+          </button>
+        </div>
         <h3 className='card-title mb-3'>Edit Post</h3>
         <form onSubmit={handleSubmit}>
           <div className='mb-3'>
@@ -117,19 +128,13 @@ export function EditPost({
           </div>
           <div className='d-flex gap-3 justify-content-end'>
             <button
-              type='button'
-              className='btn btn-outline-secondary'
-              onClick={onCancelEdit}
-            >
-              Cancel Edit
-            </button>
-            <button
               type='submit'
               className='btn btn-primary'
               disabled={!title || updatePostMutation.isPending}
             >
               {updatePostMutation.isPending ? 'Updating...' : 'Update Post'}
             </button>
+            <DeletePost postId={postId} />
           </div>
           {updatePostMutation.isSuccess ? (
             <div className='mt-3 alert alert-success'>
