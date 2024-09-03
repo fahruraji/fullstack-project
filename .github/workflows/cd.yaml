@@ -55,3 +55,7 @@ jobs:
           service: blog-frontend
           image: ${{ secrets.DOCKERHUB_USERNAME }}/blog-frontend2:latest
           region: ${{ secrets.GOOGLECLOUD_REGION }}
+
+    environment:
+      name: production
+      url: ${{ steps.deploy-frontend.outputs.url }}
