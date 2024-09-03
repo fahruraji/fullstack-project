@@ -19,21 +19,13 @@ export function DeletePost({ postId }) {
   return (
     <>
       <button
-        className='btn btn-sm btn-outline-danger'
+        className='btn btn-danger'
         style={{ border: 'none' }}
         aria-label='Delete Post'
         onClick={handleDelete}
         disabled={deletePostMutation.isLoading}
       >
-        {deletePostMutation.isLoading ? (
-          <>
-            <i className='fa-solid fa-hourglass-half'></i> Deleting...
-          </>
-        ) : (
-          <>
-            <i className='fa-regular fa-trash-can'></i> Delete
-          </>
-        )}
+        {deletePostMutation.isLoading ? 'Deleting...' : 'Delete Post'}
       </button>
       {deletePostMutation.isSuccess && <p>Post deleted successfully!</p>}
     </>

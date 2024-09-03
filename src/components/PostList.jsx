@@ -1,7 +1,6 @@
 import { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { Post } from './Post.jsx'
-import { DeletePost } from './DeletePost.jsx'
 
 const cardColors = ['#f4a6a6', '#a3d9a5', '#f8e5a1', '#d4d4d4', '#a2c2e0']
 
@@ -18,19 +17,12 @@ export function PostList({ posts = [], onPostClick }) {
             backgroundColor: cardColors[index % cardColors.length],
             color: '#333',
           }}
+          onClick={() => onPostClick(post)} 
+          onKeyDown={(e) => e.key === 'Enter' && onPostClick(post)}
+          role="button"
+          tabIndex="0"
         >
           <Fragment key={post._id}>
-            <div className='d-flex justify-content-between'>
-              <button
-                className='btn btn-sm btn-outline-secondary'
-                style={{ border: 'none' }}
-                aria-label='Edit Post'
-                onClick={() => onPostClick(post)}
-              >
-                <i className='fa-regular fa-pen-to-square'></i> Edit
-              </button>
-              <DeletePost postId={post._id} />
-            </div>
             <Post {...post} key={post._id} />
           </Fragment>
         </div>
